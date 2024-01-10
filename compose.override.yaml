@@ -1,0 +1,7 @@
+services:
+  main:
+    build:
+      target: development
+    tmpfs:
+      - /go/pkg/mod
+      - /root/.cache/go-build

@@ -1,0 +1,23 @@
+{
+  "dockerComposeFile": ["../compose.yaml", "../compose.override.yaml"],
+  "service": "main",
+  "workspaceFolder": "/work",
+  "shutdownAction": "none",
+  "customizations": {
+    "vscode": {
+      "settings": {
+        "editor.codeActionsOnSave": {
+          "source.fixAll": "explicit"
+        },
+        "editor.formatOnSave": true,
+        "editor.inlineSuggest.enabled": true,
+        "editor.tabSize": 2,
+        "files.autoGuessEncoding": true,
+        "files.eol": "\n",
+        "files.insertFinalNewline": true,
+        "files.trimTrailingWhitespace": true
+      },
+      "extensions": ["golang.go"]
+    }
+  }
+}

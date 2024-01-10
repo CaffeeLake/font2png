@@ -1,0 +1,17 @@
+imports: ./imports
+exports: ./exports
+unicodestart: 0x000021
+unicodeend: 0x00007E
+captions: true
+additionalprompts:
+  - unicode
+  - font
+  - rune
+  - letter
+  - figure
+  - glyphs
+  - character
+  - symbol
+  - black
+  - transparent
+  - center

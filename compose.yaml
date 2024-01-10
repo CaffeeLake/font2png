@@ -1,0 +1,10 @@
+services:
+  main:
+    build:
+      context: .
+      dockerfile: dockerfile
+      target: production
+    working_dir: /work
+    volumes:
+      - .:/work:cached
+    restart: on-failure
