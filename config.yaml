@@ -1,17 +1,7 @@
 imports: ./imports
 exports: ./exports
-unicodestart: 0x000021
-unicodeend: 0x00007E
+unicodestart: 0x000030
+unicodeend: 0x000039
 captions: true
 additionalprompts:
-  - unicode
-  - font
-  - rune
-  - letter
-  - figure
-  - glyphs
-  - character
-  - symbol
-  - black
-  - transparent
-  - center
+  - 23d7a07b8572afbc

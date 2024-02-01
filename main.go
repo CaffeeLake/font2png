@@ -69,7 +69,7 @@ func cmd() {
 			}
 
 			img := image.NewRGBA(image.Rect(0, 0, 512, 512))
-			draw.Draw(img, img.Bounds(), image.Transparent, image.Point{}, draw.Src)
+			draw.Draw(img, img.Bounds(), image.White, image.Point{}, draw.Src)
 
 			c := freetype.NewContext()
 			c.SetDPI(72)
@@ -84,7 +84,7 @@ func cmd() {
 				log.Fatalln(err)
 			}
 
-			filename := fmt.Sprintf("%s/%s/u%06x.png", config.Exports, fontname, r)
+			filename := fmt.Sprintf("%s/%s-u%06x.png", config.Exports, fontname, r)
 			dir := filepath.Dir(filename)
 			if err := os.MkdirAll(dir, 0755); err != nil {
 				log.Fatalln(err)
@@ -99,12 +99,12 @@ func cmd() {
 			f.Close()
 
 			if config.Captions {
-				caption := fmt.Sprintf("%s/%s/u%06x.txt", config.Exports, fontname, r)
+				caption := fmt.Sprintf("%s/%s-u%06x.txt", config.Exports, fontname, r)
 				f, err = os.Create(caption)
 				if err != nil {
 					log.Fatalln(err)
 				}
-				if _, err := f.WriteString(fmt.Sprintf("%s, u%06x, %s, %s\n", string(r), r, fontname, additionalpromptstr)); err != nil {
+				if _, err := f.WriteString(fmt.Sprintf("u%06x, %s, %s, %s\n", r, string(r), fontname, additionalpromptstr)); err != nil {
 					log.Fatalln(err)
 				}
 				f.Close()
