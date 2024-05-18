@@ -1,10 +1,10 @@
 module font2png
 
-go 1.21
+go 1.22
 
 require (
 	github.com/golang/freetype v0.0.0-20170609003504-e2365dfdc4a0
 	gopkg.in/yaml.v3 v3.0.1
 )
 
-require golang.org/x/image v0.15.0 // indirect
+require golang.org/x/image v0.16.0 // indirect
