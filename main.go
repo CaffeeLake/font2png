@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"image"
 	"image/draw"
+	"image/jpeg"
 	"image/png"
 	"log"
 	"os"
@@ -25,6 +26,7 @@ func main() {
 type ConfigTypes struct {
 	Imports           string   `yaml:"imports"`
 	Exports           string   `yaml:"exports"`
+	ImageType         string   `yaml:"imagetype"`
 	UnicodeStart      int32    `yaml:"unicodestart"`
 	UnicodeEnd        int32    `yaml:"unicodeend"`
 	Captions          bool     `yaml:"captions"`
@@ -69,7 +71,7 @@ func cmd() {
 			}
 
 			img := image.NewRGBA(image.Rect(0, 0, 512, 512))
-			draw.Draw(img, img.Bounds(), image.Transparent, image.Point{}, draw.Src)
+			draw.Draw(img, img.Bounds(), image.White, image.Point{}, draw.Src)
 
 			c := freetype.NewContext()
 			c.SetDPI(72)
@@ -84,7 +86,7 @@ func cmd() {
 				log.Fatalln(err)
 			}
 
-			filename := fmt.Sprintf("%s/%s/u%06x.png", config.Exports, fontname, r)
+			filename := fmt.Sprintf("%s/%s/u%06x.%s", config.Exports, fontname, r, config.ImageType)
 			dir := filepath.Dir(filename)
 			if err := os.MkdirAll(dir, 0755); err != nil {
 				log.Fatalln(err)
@@ -93,9 +95,17 @@ func cmd() {
 			if err != nil {
 				log.Fatalln(err)
 			}
-			if err := png.Encode(f, img); err != nil {
-				log.Fatalln(err)
+
+			if config.ImageType == "png" {
+				if err := png.Encode(f, img); err != nil {
+					log.Fatalln(err)
+				}
+			} else if config.ImageType == "jpg" || config.ImageType == "jpeg" {
+				if err := jpeg.Encode(f, img, &jpeg.Options{Quality: 100}); err != nil {
+					log.Fatalln(err)
+				}
 			}
+
 			f.Close()
 
 			if config.Captions {

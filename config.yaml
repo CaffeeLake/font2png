@@ -1,5 +1,6 @@
 imports: ./imports
 exports: ./exports
+imagetype: png
 unicodestart: 0x000021
 unicodeend: 0x00007E
 captions: true
