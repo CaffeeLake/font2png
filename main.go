@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"image"
+	"image/color"
 	"image/draw"
 	"image/jpeg"
 	"image/png"
@@ -71,7 +72,7 @@ func cmd() {
 			}
 
 			img := image.NewRGBA(image.Rect(0, 0, 512, 512))
-			draw.Draw(img, img.Bounds(), image.White, image.Point{}, draw.Src)
+			draw.Draw(img, img.Bounds(), &image.Uniform{C: color.RGBA{R: 255, G: 255, B: 255, A: 255}}, image.Point{}, draw.Src)
 
 			c := freetype.NewContext()
 			c.SetDPI(72)
@@ -79,7 +80,7 @@ func cmd() {
 			c.SetFontSize(448)
 			c.SetClip(img.Bounds())
 			c.SetDst(img)
-			c.SetSrc(image.Black)
+			c.SetSrc(&image.Uniform{C: color.RGBA{R: 0, G: 0, B: 0, A: 255}})
 			pt := freetype.Pt(32, 417)
 			_, err := c.DrawString(string(r), pt)
 			if err != nil {
@@ -114,7 +115,7 @@ func cmd() {
 				if err != nil {
 					log.Fatalln(err)
 				}
-				if _, err := f.WriteString(fmt.Sprintf("%s, u%06x, %s, %s\n", string(r), r, fontname, additionalpromptstr)); err != nil {
+				if _, err := f.WriteString(fmt.Sprintf("u%06x, %s, %s, %s\n", r, string(r), fontname, additionalpromptstr)); err != nil {
 					log.Fatalln(err)
 				}
 				f.Close()
