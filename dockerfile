@@ -1,6 +1,6 @@
 # syntax=docker/dockerfile:1-labs
 
-ARG go_version=1.23
+ARG go_version=1.24
 
 # workspace
 FROM --platform=$BUILDPLATFORM golang:${go_version} AS workspace
